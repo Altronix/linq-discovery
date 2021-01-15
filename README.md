@@ -35,3 +35,13 @@ Device {
   port: 80
 }
 </pre>
+
+<h3>To get a list of devices discovered since application started</h3>
+<pre>
+let array_of_devices = disco.get_devices()
+</pre>
+
+<h3>To clear the list of devices discovered</h3>
+<pre>
+disco.clear()
+</pre>
