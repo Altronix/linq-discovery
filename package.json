@@ -1,6 +1,6 @@
 {
   "name": "linq-discovery",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Discover Linq Devices Using mdns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
