@@ -31,8 +31,10 @@ export declare interface Discovery {
 }
 
 export class Discovery extends EventEmitter {
+  devices: Map<string, object>
   constructor() {
     super()
+    this.devices = new Map()
   }
 
   discovery = () => {
@@ -44,8 +46,25 @@ export class Discovery extends EventEmitter {
         svc.addresses[0], // ipv4
         svc.port // port number
       )
-      this.emit('new', device)
+
+      if (!this.devices.has(device.id)) {
+        // if device is not in devices => add device to Map
+        this.devices.set(device.id, device)
+        this.emit('new', device)
+      }
     })
+  }
+
+  get_devices() {
+    let arr: object[] = []
+    for (let value of this.devices.values()) {
+      arr.push(value)
+    }
+    return arr
+  }
+
+  clear() {
+    this.devices.clear()
   }
 
   async start(poll_period_ms: number) {
@@ -53,6 +72,3 @@ export class Discovery extends EventEmitter {
     setInterval(this.discovery, poll_period_ms) // Poll every 'poll_period_ms' milliseconds
   }
 }
-
-
-
