@@ -13,11 +13,11 @@ or
 import {Discovery} from 'linq-discovery'
 
 const disco = new Discovery().on('new', async (device) => {
-  console.log(device)
+  console.dir(device)
 })
 
 async function main() {
-  disco.start(4000) // Start listening and poll every 4000 milliseconds
+  disco.start(7123) // Start discovering in port 7123
 }
 
 main().catch((err) => {
@@ -29,10 +29,11 @@ main().catch((err) => {
 <h3>Console Output Example</h3>
 <pre>
 Device {
-  product: 'linqm5',
-  id: 'a20967c9b7a4d114ad05e31d91975a36',
-  ip: '192.168.1.16',
-  port: 80
+  product: 'linq2',
+  id: 'cCzyUmwbgItEvWvzIesdoF-7seAUjH79LGC5zfTyqfs=',
+  ip: '192.168.1.57',
+  http: 80,
+  https: 443
 }
 </pre>
 
