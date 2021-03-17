@@ -1,6 +1,6 @@
 {
   "name": "linq-discovery",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Discover Linq Devices Using mdns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,9 +20,7 @@
     "lint": "eslint",
     "lint-fix": "npm run lint -- --fix"
   },
-  "dependencies": {
-    "bonjour": "^3.5.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.8",
