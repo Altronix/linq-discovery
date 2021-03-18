@@ -1,7 +1,7 @@
 {
   "name": "linq-discovery",
   "version": "2.0.0",
-  "description": "Discover Linq Devices Using mdns",
+  "description": "npm library to discover Linq Devices",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Ricardo Levano",
