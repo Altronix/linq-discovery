@@ -1,6 +1,6 @@
 # linq-discovery
 
-npm library to discover linq devices
+npm library to discover linq devices using UDP broadcast
 
 <h3>Install</h3>
 <pre>yarn add linq-discovery</pre> 
@@ -12,18 +12,16 @@ or
 <pre>
 import {Discovery} from 'linq-discovery'
 
-const disco = new Discovery().on('new', async (device) => {
-  console.dir(device)
-})
+const UDP_PORT = 7123 // Default Port used
 
-async function main() {
-  disco.start(7123) // Start discovering in port 7123
-}
+const disco = new Discovery(UDP_PORT)
+  .on('new', (device) => {                    // New device discovered
+    console.dir(device)
+  })
+  .on('message', (device) => {                // Un-filtered UDP message received
+    console.log(`${JSON.stringify(device)}`)
+  })
 
-main().catch((err) => {
-  console.error(err)
-  process.exit(1)
-})
 </pre>
 
 <h3>Console Output Example</h3>
@@ -33,7 +31,9 @@ Device {
   id: 'cCzyUmwbgItEvWvzIesdoF-7seAUjH79LGC5zfTyqfs=',
   ip: '192.168.1.57',
   http: 80,
-  https: 443
+  https: 443,
+  mqtt: 1883,
+  mqtts: 8883
 }
 </pre>
 

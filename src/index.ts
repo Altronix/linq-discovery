@@ -1,53 +1,31 @@
 import { EventEmitter } from 'events'
 import dgram from 'dgram'
-const server = dgram.createSocket('udp4')
-class Device {
-  product: string
-  id: string
-  ip: string
-  http: number
-  https: number
 
-  constructor(
-    product: string,
-    id: string,
-    ip: string,
-    http: number,
-    https: number
-  ) {
-    this.product = product
-    this.id = id
-    this.ip = ip
-    this.http = http
-    this.https = https
-  }
-}
+const UDP_BCAST_PORT = 7123
+const server = dgram.createSocket('udp4')
 
 export declare interface Discovery {
   on(event: 'new', listener: (msg: object) => void): this
+  on(event: 'message', listener: (msg: object) => void): this
 }
+
 export class Discovery extends EventEmitter {
   devices: Map<string, object>
-  constructor() {
+  constructor(port: number = UDP_BCAST_PORT) {
     super()
     this.devices = new Map()
+    this.start(port)
   }
 
   async start(port: number) {
     await server.bind(port)
     server.on('message', (msg: string) => {
-      let obj = JSON.parse(msg.toString().split('\n')[0]);
-      let device: Device = new Device(
-        obj.product,
-        obj.id,
-        obj.ip,
-        obj.http,
-        obj.https
-      )
-      if (!this.devices.has(device.id)) {
-        this.devices.set(device.id, device)
-        this.emit('new', device)
+      let obj = JSON.parse(msg.toString().split('\n')[0])
+      if (!this.devices.has(obj.id)) {
+        this.devices.set(obj.id, obj)
+        this.emit('new', obj)
       }
+      this.emit('message', obj)
     })
   }
 
@@ -63,4 +41,3 @@ export class Discovery extends EventEmitter {
     this.devices.clear()
   }
 }
-
