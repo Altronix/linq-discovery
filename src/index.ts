@@ -4,10 +4,12 @@ import dgram from 'dgram'
 const UDP_BCAST_PORT = 7123 /* Default PORT */
 const server = dgram.createSocket('udp4')
 
+type PLATFORM = 'k64' | 'm5' | 'same53'
+
 interface Device {
   version: number
   manufacturer: string
-  family: string
+  family: PLATFORM
   product: string
   id: string
   ip: string
@@ -15,6 +17,8 @@ interface Device {
   https?: number
   mqtt?: number
   mqtts?: number
+  zmtp?: number
+  zmtps?: number
 }
 
 export declare interface Discovery {
