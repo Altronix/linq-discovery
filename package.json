@@ -1,6 +1,6 @@
 {
   "name": "linq-discovery",
-  "version": "2.1.2",
+  "version": "2.1.4",
   "description": "npm library to discover Linq Devices",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
