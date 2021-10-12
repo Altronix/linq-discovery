@@ -6,7 +6,7 @@ const server = dgram.createSocket('udp4')
 
 type PLATFORM = 'k64' | 'm5' | 'same53'
 
-interface Device {
+export interface Device {
   version: number
   manufacturer: string
   family: PLATFORM
